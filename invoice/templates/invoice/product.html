@@ -1,0 +1,94 @@
+{% extends "invoice/basic.html" %}
+{% block title %}product create{% endblock %}
+{% block content %}
+
+<br><br>
+<div class="container card card-footer">
+    <h1>Create Product</h1>
+    <hr>
+    <form method="POST">{% csrf_token %}
+        <table>
+            <tr>
+                <td>
+                    <h5>product: </h5>
+                    <select class="form-control" name="product">{% for p in products %}
+                        <option>{{p.1}}</option>{% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <h5>Make/Mfg.: </h5>
+                    <select class="form-control" name="mfg">{% for p in mfg %}
+                        <option>{{p.1}}</option>{% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <h5>Diameter: </h5>
+                    <select class="form-control" name="diameter">{% for p in diameter %}
+                        <option>{{p.1}}</option>{% endfor %}
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <h5>Grade: </h5>
+                    <select class="form-control" name="grade">{% for p in grade %}
+                        <option>{{p.1}}</option>{% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <h5>Quantity: </h5>
+                    <select class="form-control" name="qty">
+                        <option>1</option>
+                        <option selected>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </td>
+                <td>
+                    <h5>Unit: </h5>
+                    <select class="form-control" name="unit">
+                        <option>CT</option>
+                        <option selected>MT</option>
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <h5>Rate: </h5>
+                    <input type="number" min="0" class="form-control" name="rate" id="rate" value="0">
+                </td>
+            </tr>
+
+        </table><br>
+        <button class="btn btn-primary" type="submit">submit</button>
+
+    </form><br>
+    {% if tag %}
+    <div class="row">
+        <h5>Taxable Amount:</h5><input class="form-control col-md-3 mr-2" type="text" disabled value="{{amount}}">
+        <h5>CGST 9%:</h5><input class="form-control col-md-3 mr-2" type="text" disabled value="{{cgst}}">
+        <h5>SGST 9%:</h5><input class="form-control col-md-3 mr-2" type="text" disabled value="{{cgst}}">
+        <h5>IGST 18%:</h5><input class="form-control col-md-3 mr-2" type="text" disabled value="0.00">
+        <h5>Total Amount:</h5><input class="form-control col-md-3 mr-2" type="text" disabled value="{{total_amount}}">
+    </div>
+   {% endif %}<br>
+    {% if tag %}
+    <div class="col-2"">
+    <a  class="btn btn-primary" href="{% url 'tc-create' %}">Next</a></div>
+    {% endif %}
+
+</div>
+<div>
+
+    
+</div>
+
+{% endblock %}

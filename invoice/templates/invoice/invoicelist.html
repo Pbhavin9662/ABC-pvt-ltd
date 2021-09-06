@@ -1,0 +1,43 @@
+{% extends "invoice/basic.html" %}
+{% block title %}invoice list{% endblock %}
+{% block content %}<br><br>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Invoice Book</h2>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+    <a class="btn btn-primary" href="{% url 'invoice-create' %}">+ Create</a>     
+        </div>
+    </div>
+    <hr>
+    
+    <table class="table table-bordered">
+        <tr>
+            <th>Invoice no.</th>
+            <th>Date</th>
+            <th>Buyer Name</th>
+            <th>Amount</th>
+            <th>
+                Options
+            </th>
+        </tr>
+        {% for i in invoices %}
+        
+        <tr>
+            <td>INV-2021-000{{i.0}}</td>
+            <td>{{i.1}}</td>
+            <td>{{i.2}}</td>
+            <td>{{i.3}}</td>
+            <td>
+                <a href="">edit</a>
+                <a href="">Delete</a>
+                <a href="">preview</a>
+            </td>
+        </tr>
+        {% endfor %}
+</div>
+
+{% endblock %}

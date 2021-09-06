@@ -1,0 +1,26 @@
+{% extends "invoice/basic.html" %}
+{% block title %}product create{% endblock %}
+{% block content %}
+
+<br><br>
+<div class="container card card-footer">
+    <form action="" method="POST">{% csrf_token %}
+    <h1>Terms and conditions - New</h1>
+    <hr>
+    <h5>Quantity: </h5>
+    <select class="form-control" name="tc">
+        {% for i in tc %}
+
+        <option>{{i.2}}</option>
+        {% endfor %}
+    </select><br>
+    <div style="text-align: center;">
+    <button  type="submit" class="btn btn-primary">Add</button></div>
+</form><br>
+{% if msg %}
+<div class="alert alert-success" role="alert">
+    {{msg}}
+  </div>
+{% endif %}
+</div>
+{% endblock %}

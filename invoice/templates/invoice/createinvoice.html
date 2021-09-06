@@ -1,0 +1,124 @@
+{% extends "invoice/basic.html" %}
+{% block title %}invoice create{% endblock %}
+{% block content %}
+<br><br>
+    <div class="container card card-footer">
+    <h1>create Invoice</h1>
+    
+    <hr>
+    <form method="POST">{% csrf_token %}
+        {% for i in invoices %}
+        <div class="row">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Invoice No.</label>
+            <input type="text" class="mr-2 form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="INV-2021-000{{i.0}}">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">invoice Date</label>
+            <input type="date" class="form-control" id="date" name="date" aria-describedby="date" value="{{i.1}}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Buyer Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{i.2}}">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1">detail</label>
+              <textarea name="address" class="form-control" id="address" cols="50" rows="3">
+                state code : {{i.3}}
+                state : {{i.4}}
+                GSTIN : {{i.5}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Remark</label>
+                <textarea name="remark" class="form-control" id="remark" cols="50" rows="3">{{i.6}}</textarea>
+              </div>
+            {% endfor %}
+        </div>
+        
+        <table class="table table-bordered">
+            <tr>
+                <td></td><td></td>
+                <td></td>
+                <td></td><td></td><td><td></td></td><td></td><td></td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'product-create' %}">+ Create Product</a>     
+                </td>
+            </tr>
+        <tr>
+            <th>SR no.</th>
+            <th>Product Description</th>
+            <th>Qty.</th>
+            <th>Rate</th>
+            <th>taxable Amount</th>
+            <th>CGST (9%)</th>
+            <th>SGST (9%)</th>
+            <th>IGST (18%)</th>
+            <th>
+                Total Amount 
+            </th>
+            <th>Options</th>
+        </tr>               
+            {% for i in product %}
+            
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.name}}<br>-Make: {{i.mfg}}</td>
+                        <td>{{i.qty}} {{i.unit}}</td>
+                        <td>{{i.rate}}</td>
+                        <td>{{i.taxable_amount}}</td>
+                        <td>{{i.cgst}}</td>
+                        <td>{{i.sgst}}</td>
+                        <td>{{i.igst}}</td>
+                        <td>{{i.total_amount}}</td>                       
+                        <td>
+                            <a href="{% url 'update-product' i.id %}">edit</a>
+                            <a href="{% url 'delete-product' i.id %}">Delete</a>
+                        </td>
+                    </tr>                                        
+            {% endfor %}           
+            <tr>
+                <td></td><td></td>
+                <td></td>
+                <td></td><td></td><td><td></td></td><td></td><td></td>
+               
+            </tr>
+        </table>
+        <div class="row">
+        <div class="col-md-6">
+            <div class="row"> 
+            <h5 class="ml-3 mr-5">terms and conditions(T & C)</h3>
+            
+                <a class="btn btn-primary" href="{% url 'tc-create' %}">+ Add</a>     
+            </div><br>
+            <table class="table table-bordered">
+                {% for i in tc %}
+                <tr>
+                    <td>{{i.1}}</td>
+                    <td>{{i.2}}</td>
+                    <td>
+                        <a href="">edit</a>
+                        <a href="">Delete</a>
+                    </td>
+
+                </tr>{% endfor %}
+            </table>
+        </div>
+        <div class="col-md-6 ">
+            <br>
+                <span>sub Total: </span>{{sub_total}} <br>
+                <span>round: </span>0 <br>
+               <span>Net Amount: </span> {{net_amount}}
+
+        </div>
+    </div>
+        <div style="text-align: center;">
+            <a class="btn btn-primary" href="{% url 'invoiceList' %}">save</a> </div>
+
+
+        </form>
+        </div>
+        
+        
+<br><br>
+{% endblock %}

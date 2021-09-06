@@ -1,0 +1,56 @@
+{% extends "invoice/basic.html" %}
+{% block title %}product edit{% endblock %}
+{% block content %}
+
+
+
+<br><br>
+<div class="container card card-footer">
+    <h1>edit Product</h1>
+    <hr>
+    <form method="POST">{% csrf_token %}
+        <table>
+            <tr>
+                <td>
+                    <h5>product: </h5>
+                    <input type="text" name="product" value="{{p.name}}">
+                </td>
+                <td>
+                    <h5>Make/Mfg.: </h5>
+                    <input type="text" name="mfg" value="{{p.mfg}}">
+                </td>
+                <td>
+                    <h5>Diameter: </h5>
+                    <input type="text" name="diameter" value="{{p.diameter}}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>Grade: </h5>
+                    <input type="text" name="grade" value="{{p.grade}}">
+                </td>
+                <td>
+                    <h5>Quantity: </h5>
+                    <input type="number" min="0" name="qty" value="{{p.qty}}">
+                </td>
+                <td>
+                    <h5>Unit: </h5>
+                    <input type="text"  name="unit" value="{{p.unit}}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>Rate: </h5>
+                    <input type="number" min="0" class="form-control" name="rate" id="rate" value="{{p.rate}}">
+                </td>
+            </tr>
+            
+        </table><br>
+        <button class="btn btn-primary" type="submit">submit</button>
+
+    </form><br>
+</div>
+<div>
+</div>
+
+{% endblock %}
